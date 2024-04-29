@@ -9,17 +9,17 @@
       Title="ContactPage">
 
     <Grid>
-        <Label Content="받는 사람" Margin="53,37,685,0" 
+        <Label Content="받는 사람" Margin="39,37,699,0" 
                VerticalAlignment="Top"/>
-        <Label Content="내용" HorizontalAlignment="Left" Margin="53,85,0,0" 
-               VerticalAlignment="Top" RenderTransformOrigin="0.554,-1.235"/>
+        <Label Content="내용" HorizontalAlignment="Left" Margin="53,85,0,0" VerticalAlignment="Top" />
+        
         <TextBox HorizontalAlignment="Left" Margin="115,45,0,0" TextWrapping="Wrap" 
                  Text="TextBox" VerticalAlignment="Top" Width="638" ToolTip="받는사람 주소"/>
-        <TextBox Margin="115,85,0,0" TextWrapping="Wrap" 
-                 Text="TextBox" VerticalAlignment="Top" Height="324" ToolTip="내용입력" HorizontalAlignment="Left" Width="638"/>
+        <TextBox Margin="115,85,47,0" TextWrapping="Wrap" 
+                 Text="TextBox" VerticalAlignment="Top" Height="337" ToolTip="내용입력" />
 
-        <Grid Margin="5">
+        
             
-        </Grid>
+        
     </Grid>
 </Page>
