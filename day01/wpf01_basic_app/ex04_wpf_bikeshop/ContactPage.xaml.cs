@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ex04_wpf_bikeshop;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,6 +26,21 @@ namespace ex04_wpf_bikeshop
             InitializeComponent();
         }
 
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            Bike myBike = new Bike();
+            myBike.speed = 60;
+            myBike.color = Colors.Red;
 
+            TextBox text1 = new TextBox();
+            StpBike.DataContext = myBike;
+            
+        }
+
+        //private void SldValue_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        //{
+        //    PrgValue.Value = (double)e.NewValue;
+        //    LblValue.Content = Math.Round(PrgValue.Value, 1); // Math.Round() 소수점 몇째자리까지 나올건지 지정가능
+        //}
     }
 }
