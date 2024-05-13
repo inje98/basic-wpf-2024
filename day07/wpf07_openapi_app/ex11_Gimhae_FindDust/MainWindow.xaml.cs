@@ -49,7 +49,8 @@ namespace ex11_Gimhae_FindDust
         // 실시간조회 버튼 클릭
         private async void BtnReqRealTime_Click(object sender, RoutedEventArgs e)
         {
-            string openApiUri = "https://smartcity.gimhae.go.kr/smart_tour/dashboard/api/publicData/dustSensor";
+            string openApiUri = "http://smartcity.gimhae.go.kr/smart_tour/dashboard/api/publicData/dustSensor";
+
             string result = string.Empty;
 
             // WebRequest, WebResponse 객체
