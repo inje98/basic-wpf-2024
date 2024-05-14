@@ -18,6 +18,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="60" />
             <RowDefinition Height="1*" />
+            <RowDefinition Height="60" />
             <RowDefinition Height="30" />
         </Grid.RowDefinitions>
 
@@ -34,9 +35,7 @@
             <Button x:Name="BtnSearch" Content="조회" Width="80" Margin="5,10"
             Style="{StaticResource MahApps.Styles.Button.Square.Accent}"
             Click="BtnSearch_Click" />
-            <Button x:Name="BtnSaveData" Content="저장" Width="80" Margin="5,10"
-            Style="{StaticResource MahApps.Styles.Button.Square.Highlight}"
-            Click="BtnSaveData_Click" />
+            
             <ComboBox x:Name="CboFoodcategory" Width="160" Margin="5"
               Style="{StaticResource MahApps.Styles.ComboBox}"
               mah:TextBoxHelper.Watermark="음식카테고리 선택"
@@ -51,9 +50,26 @@
           IsReadOnly="True" ItemsSource="{Binding}"
           Style="{StaticResource MahApps.Styles.DataGrid.Azure}"
           MouseDoubleClick="GrdResult_MouseDoubleClick" />
+        
+        <!-- 즐겨찾기 버튼 영역-->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button x:Name="BtnSaveData" Content="즐겨찾기 추가" Width="120" Margin="5,10"
+            Style="{StaticResource MahApps.Styles.Button.Square.Highlight}"
+            Click="BtnSaveData_Click" />
+
+            <Button x:Name="BtnViewData" Content="즐겨찾기 보기" Width="120" Margin="5,10"
+            Style="{StaticResource MahApps.Styles.Button.Square.Highlight}"
+            Click="BtnViewData_Click" />
+
+
+
+            <Button x:Name="BtnDelData" Content="즐겨찾기 삭제" Width="120" Margin="5,10"
+            Style="{StaticResource MahApps.Styles.Button.Square.Highlight}"
+            Click="BtnDelData_Click" />
+        </StackPanel>
 
         <!-- 맨하단 상태바 위치 -->
-        <StatusBar Grid.Row="2">
+        <StatusBar Grid.Row="3">
             <StatusBarItem Content="대구 맛집 리스트" />
             <Separator Style="{StaticResource MahApps.Styles.Separator.StatusBar}" />
             <StatusBarItem x:Name="StsResult" />

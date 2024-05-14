@@ -178,5 +178,16 @@ namespace ex12_Daegu_restaurant
             var curItem = GrdResult.SelectedItem as MatJib;
             await this.ShowMessageAsync($"{curItem.SMPL_DESC})", Name);
         }
+
+        private void BtnViewData_Click(object sender, RoutedEventArgs e)
+        {
+            this.DataContext = null;
+
+        }
+
+        private void BtnDelData_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
