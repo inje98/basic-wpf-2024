@@ -87,5 +87,7 @@ namespace ex12_Daegu_restaurant.Models
 
         public static readonly string GETCATGORI_QUERY = @"SELECT DISTINCT FD_CS AS Save_Date
                                                             FROM [EMS].[dbo].[Restaurant]";
+
+        public static readonly string DELETE_QUERY = @"DELETE FROM [dbo].[Restaurant] WHERE Id = @Id";
     }
 }

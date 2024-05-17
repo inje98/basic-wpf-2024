@@ -11,6 +11,7 @@ using Microsoft.Data.SqlClient;
 using Newtonsoft.Json.Linq;
 using ex12_Daegu_restaurant.Models;
 using System.Windows.Input;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace ex12_Daegu_restaurant
 {
@@ -46,7 +47,10 @@ namespace ex12_Daegu_restaurant
                 {
                     saveDates.Add(Convert.ToString(row["Save_Date"]));
                 }
-                CboFoodcategory.ItemsSource = saveDates;
+                // CboFoodcategory.ItemsSource = saveDates;
+               
+
+                
             }
         }
 
@@ -111,8 +115,13 @@ namespace ex12_Daegu_restaurant
         {
             if (GrdResult.Items.Count == 0)
             {
-                await this.ShowMessageAsync("저장오류", "실시간 조회 후 저장하십시오.");
+                await this.ShowMessageAsync("저장오류", "조회 후 저장하십시오.");
                 return;
+            }
+            var addMatJib = new List<MatJib>();
+            foreach (MatJib item in GrdResult.SelectedItems)
+            {
+                addMatJib.Add(item);
             }
 
             try
@@ -122,7 +131,7 @@ namespace ex12_Daegu_restaurant
                     conn.Open();
 
                     var insRes = 0;
-                    foreach (MatJib item in GrdResult.Items)
+                    foreach (MatJib item in addMatJib)
                     {
                         SqlCommand cmd = new SqlCommand(Models.MatJib.INSERT_QUERY, conn);
                         cmd.Parameters.AddWithValue("@OPENDATA_ID", item.OPENDATA_ID);
@@ -171,6 +180,7 @@ namespace ex12_Daegu_restaurant
                 // 결과 개수를 표시합니다.
                 StsResult.Content = $"카테고리 '{selectedCategory}'의 데이터 {filteredMatJibs.Count}건 조회완료!";
             }
+
         }
 
         private async void GrdResult_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -179,15 +189,97 @@ namespace ex12_Daegu_restaurant
             await this.ShowMessageAsync($"{curItem.SMPL_DESC})", Name);
         }
 
-        private void BtnViewData_Click(object sender, RoutedEventArgs e)
+        private async void BtnViewData_Click(object sender, RoutedEventArgs e)
         {
             this.DataContext = null;
+            // 5.17
+            List<MatJib> matJibs = new List<MatJib>();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(Helpers.Common.CONNSTRING))
+                {
+                    conn.Open();
+
+                    var cmd = new SqlCommand(Models.MatJib.SELECT_QUERY, conn);
+                    var adapter = new SqlDataAdapter(cmd);
+                    var dSet = new DataSet();
+                    adapter.Fill(dSet, "MatJib");
+
+                    foreach (DataRow row in dSet.Tables["MatJib"].Rows)
+                    {
+                        var matjib = new MatJib()
+                        {
+                            Id = Convert.ToInt32(row["Id"]),
+                            OPENDATA_ID = Convert.ToInt32(row["OPENDATA_ID"]),
+                            GNG_CS = Convert.ToString(row["GNG_CS"]),
+                            FD_CS = Convert.ToString(row["FD_CS"]),
+                            BZ_NM = Convert.ToString(row["BZ_NM"]),
+                            TLNO = Convert.ToString(row["TLNO"]),
+                            MBZ_HR = Convert.ToString(row["MBZ_HR"]),
+                            SEAT_CNT = Convert.ToString(row["SEAT_CNT"]),
+                            PKPL = Convert.ToString(row["PKPL"]),
+                            HP = Convert.ToString(row["HP"]),
+                            BKN_YN = Convert.ToString(row["BKN_YN"]),
+                            MNU = Convert.ToString(row["MNU"]),
+                            SMPL_DESC = Convert.ToString(row["SMPL_DESC"])
+                        };
+                        matJibs.Add(matjib);
+                        }
+                    this.DataContext = matJibs;
+                    StsResult.Content = $"즐겨찾기 {matJibs.Count}건 조회완료";
+
+                    }
+                }
+            
+            catch (Exception ex)
+            {
+                await this.ShowMessageAsync("즐겨찾기", "즐겨찾기 조회오류.");
+            }
 
         }
 
-        private void BtnDelData_Click(object sender, RoutedEventArgs e)
+        private async void BtnDelData_Click(object sender, RoutedEventArgs e)
         {
+            if (GrdResult.SelectedItems.Count == 0)
+            {
+                await this.ShowMessageAsync("삭제", "삭제할 영화를 선택하세요.");
+                return;
+            }
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(Helpers.Common.CONNSTRING))
+                {
+                    conn.Open();
+
+                    var delRes = 0;
+
+                    foreach (MatJib item in GrdResult.SelectedItems)
+                    {
+                        SqlCommand cmd = new SqlCommand(Models.MatJib.DELETE_QUERY, conn);
+                        cmd.Parameters.AddWithValue("@Id", item.Id);
+
+                        delRes += cmd.ExecuteNonQuery();
+                    }
+
+                    if (delRes == GrdResult.SelectedItems.Count)
+                    {
+                        await this.ShowMessageAsync("삭제", $"즐겨찾기 {delRes}건 삭제");
+                    }
+                    else
+                    {
+                        await this.ShowMessageAsync("삭제", $"즐겨찾기 {GrdResult.SelectedItems.Count}건 중 {delRes} 삭제");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                await this.ShowMessageAsync("오류", $"즐겨찾기 오류 {ex.Message}");
+            }
+            BtnViewData_Click(sender, e);
 
         }
     }
+
+
 }

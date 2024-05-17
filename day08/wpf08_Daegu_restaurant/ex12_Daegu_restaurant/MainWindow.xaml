@@ -35,13 +35,22 @@
             <Button x:Name="BtnSearch" Content="조회" Width="80" Margin="5,10"
             Style="{StaticResource MahApps.Styles.Button.Square.Accent}"
             Click="BtnSearch_Click" />
-            
-            <ComboBox x:Name="CboFoodcategory" Width="160" Margin="5"
+
+                <ComboBox x:Name="CboFoodcategory" Width="160" Margin="5"
               Style="{StaticResource MahApps.Styles.ComboBox}"
               mah:TextBoxHelper.Watermark="음식카테고리 선택"
               mah:TextBoxHelper.UseFloatingWatermark="True"
               mah:TextBoxHelper.ClearTextButton="True"
-              SelectionChanged="CboFoodcategory_SelectionChanged" />
+              SelectionChanged="CboFoodcategory_SelectionChanged" >
+                    <TextBlock Text="한식"/>
+                    <TextBlock Text="일식"/>
+                    <TextBlock Text="중식"/>
+                    <TextBlock Text="양식"/>
+                    <TextBlock Text="디저트/베이커리"/>
+                    <TextBlock Text="세계요리"/>
+                    <TextBlock Text="전통차/커피전문점"/>
+                    <TextBlock Text="특별한 술집"/>
+                </ComboBox>
         </StackPanel>
         </Grid>
 
@@ -49,7 +58,16 @@
         <DataGrid x:Name="GrdResult" Grid.Row="1" Margin="10"
           IsReadOnly="True" ItemsSource="{Binding}"
           Style="{StaticResource MahApps.Styles.DataGrid.Azure}"
-          MouseDoubleClick="GrdResult_MouseDoubleClick" />
+          MouseDoubleClick="GrdResult_MouseDoubleClick" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="가게명" Binding="{Binding BZ_NM}"/>
+                <DataGridTextColumn Header="카테고리" Binding="{Binding FD_CS}" />
+                <DataGridTextColumn Header="주소" Binding="{Binding GNG_CS}" />
+                <DataGridTextColumn Header="영업시간" Binding="{Binding MBZ_HR}" />
+                <DataGridTextColumn Header="주차여부" Binding="{Binding PKPL}" />
+                <DataGridTextColumn Header="전화번호" Binding="{Binding TLNO}" />
+            </DataGrid.Columns>
+        </DataGrid>
         
         <!-- 즐겨찾기 버튼 영역-->
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
