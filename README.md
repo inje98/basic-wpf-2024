@@ -159,19 +159,19 @@ IoT 개발자 WPF 학습리포지토리
     - 대구 맛집 리스트 조회 및 즐겨찾기 프로그램
 
     - 대구 맛집 조회
-        - [맛집조회](https://github.com/inje98/basic-wpf-2024/blob/main/images/Deagu01.png?raw=true)
+        - ![맛집조회](https://github.com/inje98/basic-wpf-2024/blob/main/images/Deagu01.png?raw=true)
 
     - 선택한 맛집 즐겨찾기
-        - [즐겨찾기저장](https://raw.githubusercontent.com/inje98/basic-wpf-2024/main/images/Deagu02.png)
+        - ![즐겨찾기저장](https://raw.githubusercontent.com/inje98/basic-wpf-2024/main/images/Deagu02.png)
 
     - 즐겨찾기 내역 조회
-        - [즐겨찾기보기](https://raw.githubusercontent.com/inje98/basic-wpf-2024/main/images/Deagu03.png)
+        - ![즐겨찾기보기](https://raw.githubusercontent.com/inje98/basic-wpf-2024/main/images/Deagu03.png)
         
     - 즐겨찾기 삭제
-        - [즐겨찾기삭제](https://raw.githubusercontent.com/inje98/basic-wpf-2024/main/images/Deagu04.png)
+        - ![즐겨찾기삭제](https://raw.githubusercontent.com/inje98/basic-wpf-2024/main/images/Deagu04.png)
         
     - 음식 카테고리별 조회
-        - [카테고리조회](https://raw.githubusercontent.com/inje98/basic-wpf-2024/main/images/Deagu05.png)
+        - ![카테고리조회](https://raw.githubusercontent.com/inje98/basic-wpf-2024/main/images/Deagu05.png)
         
         
     
