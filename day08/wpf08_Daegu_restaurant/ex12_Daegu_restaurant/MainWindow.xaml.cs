@@ -34,19 +34,19 @@ namespace ex12_Daegu_restaurant
 
         private void InitComboDateFromDB()
         {
-            using (SqlConnection conn = new SqlConnection(Helpers.Common.CONNSTRING))
+            // using (SqlConnection conn = new SqlConnection(Helpers.Common.CONNSTRING))
             {
-                conn.Open();
-                SqlCommand cmd = new SqlCommand(Models.MatJib.GETCATGORI_QUERY, conn);
-                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                DataSet dSet = new DataSet();
-                adapter.Fill(dSet);
-                List<string> saveDates = new List<string>();
+                //conn.Open();
+                //SqlCommand cmd = new SqlCommand(Models.MatJib.GETCATGORI_QUERY, conn);
+                //SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                //DataSet dSet = new DataSet();
+                //adapter.Fill(dSet);
+                //List<string> saveDates = new List<string>();
 
-                foreach (DataRow row in dSet.Tables[0].Rows)
-                {
-                    saveDates.Add(Convert.ToString(row["Save_Date"]));
-                }
+                //foreach (DataRow row in dSet.Tables[0].Rows)
+                //{
+                //    saveDates.Add(Convert.ToString(row["Save_Date"]));
+                //}
                 // CboFoodcategory.ItemsSource = saveDates;
                
 
@@ -166,22 +166,42 @@ namespace ex12_Daegu_restaurant
         private void CboFoodcategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             // 선택된 항목을 가져옵니다.
-            string selectedCategory = CboFoodcategory.SelectedItem as string;
 
             // 선택된 항목이 있는 경우에만 필터링합니다.
-            if (!string.IsNullOrEmpty(selectedCategory) && MatJibs != null)
+            if (CboFoodcategory.SelectedItem is TextBlock selectedTextBlock)
             {
-                // 선택된 카테고리에 맞는 데이터만 필터링합니다.
-                var filteredMatJibs = MatJibs.Where(item => item.FD_CS == selectedCategory).ToList();
+                string selectedCategory = selectedTextBlock.Text;
 
-                // 필터링된 데이터를 그리드에 바인딩합니다.
-                GrdResult.ItemsSource = filteredMatJibs;
-
-                // 결과 개수를 표시합니다.
-                StsResult.Content = $"카테고리 '{selectedCategory}'의 데이터 {filteredMatJibs.Count}건 조회완료!";
+                if (!string.IsNullOrEmpty(selectedCategory) && MatJibs != null)
+                {
+                    var filteredMatJibs = MatJibs.Where(item => item.FD_CS == selectedCategory).ToList();
+                    GrdResult.ItemsSource = filteredMatJibs;
+                    StsResult.Content = $"카테고리 '{selectedCategory}'의 데이터 {filteredMatJibs.Count}건 조회완료!";
+                }
             }
+        
 
+            //string selectedCategory = CboFoodcategory.SelectedItem?.ToString();
+
+            //if (!string.IsNullOrEmpty(selectedCategory) && MatJibs != null)
+            //{
+            //    var filteredMatJibs = MatJibs.Where(item => item.FD_CS == selectedCategory).ToList();
+            //    GrdResult.ItemsSource = filteredMatJibs;
+            //    StsResult.Content = $"카테고리 '{selectedCategory}'의 데이터 {filteredMatJibs.Count}건 조회완료!";
+            //}
+            ////if (!string.IsNullOrEmpty(selectedCategory) && MatJibs != null)
+            //{
+            //    // 선택된 카테고리에 맞는 데이터만 필터링합니다.
+            //    var filteredMatJibs = MatJibs.Where(item => item.FD_CS == selectedCategory).ToList();
+
+            //    // 필터링된 데이터를 그리드에 바인딩합니다.
+            //    GrdResult.ItemsSource = filteredMatJibs;
+
+            //    // 결과 개수를 표시합니다.
+            //    StsResult.Content = $"카테고리 '{selectedCategory}'의 데이터 {filteredMatJibs.Count}건 조회완료!";
         }
+
+        
 
         private async void GrdResult_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
