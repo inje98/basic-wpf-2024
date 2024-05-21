@@ -181,4 +181,11 @@ IoT 개발자 WPF 학습리포지토리
         - 간단한 식당 소개
             - 더블클릭 시 간단한 식당 소개가 나오도록 구현
             - ![간단한소개](https://raw.githubusercontent.com/inje98/basic-wpf-2024/main/images/Deagu06.png)
+         
+        - 전체 영상
+          
+
+        https://github.com/inje98/basic-wpf-2024/assets/158007381/aef5204f-49b1-446a-a578-9b5748bb878d
+
+
     
